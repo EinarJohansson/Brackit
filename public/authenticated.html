@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>[ Brackit ] - Logged in!</title>
+
+  <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:700">
+
+  <link rel="stylesheet" media="screen and (min-width: 900px)" href="css/desktop.css" />
+  <link rel="stylesheet" media="screen and (max-width: 570px)" href="css/mobile.css" />
+  <link rel="stylesheet" media="all" href="css/styling.css" />
+
+  <script src="http://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <script src="js/brackify.js"></script>
+  <script src="js/artists.js"></script>
+  <script src="js/tracks.js"></script>
+  <script src="js/vote.js"></script>
+  <script src="js/tokens.js"></script>
+  <script src="Resources/FitText/jquery.fittext.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span class="navbar-brand"><a href="/authenticated" style="color: plum">[ Brackit ]</a></span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/data">Data <i class="far fa-chart-bar"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/letsbrackit/Brackit" target="_blank">GitHub <i
+              class="fab fa-github"></i></a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-text" data-target="#myModal" data-toggle="modal" style="color: plum">Created by <a href="https://github.com/EinarJohansson" target="_blank" style="color: plum; text-decoration: underline">Einar
+            Johansson</a></a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <div class="container ">
+    <div class="description text-center" style="margin-top: 10vh">
+      <h1 id="header">[ Brackit ]</h1>
+      <h1 id="counter" class="text-center" style="visibility: hidden;">Round 1/8</h1>
+    </div>
+
+    <form id="loggedin">
+      <div class="form-group">
+        <input class="form-control form-control-lg search-field" id="search-field" type="text" id="artist"
+          placeholder="Search for a band or an artist to begin." onkeyup="search()" autofocus="true" />
+        <p id="artist0" onclick="getTracks(0)"></p>
+        <p id="artist1" onclick="getTracks(1)"></p>
+        <p id="artist2" onclick="getTracks(2)"></p>
+        <p id="artist3" onclick="getTracks(3)"></p>
+        <p id="artist4" onclick="getTracks(4)"></p>
+        <p id="errormsg" style="display: none">No artist found!</p>
+      </div>
+    </form>
+
+    <div id="voting"></div>
+
+  </div>
+  <script src="js/tokens.js"></script>
+  <script>
+    var div = document.getElementById("voting");
+    var container = document.getElementsByClassName('container')[0];
+
+    // Desktop
+    if ($(window).width() > 500) {
+      div.setAttribute("class", "Desktopvote container-fluid");
+      div.innerHTML =
+        '<div class="Desktopvote container-fluid">\
+              <div class="table-responsive">\
+                <table class="table">\
+                  <tr>\
+                    <td>\
+                      <div class="d-flex align-items-start flex-column song">\
+                        <iframe id="song0" frameborder="0" allowtransparency="true" allow="encrypted-media" style="margin: auto"></iframe>\
+                        <button type="button" id="vote0" class="btn btn-outline-light btn-lg" onclick="vote(0)">Vote</button>\
+                      </div>\
+                    </td>\
+                    <td>\
+                    <div class="d-flex align-items-start flex-column song">\
+                      <iframe id="song1" frameborder="0" allowtransparency="true" allow="encrypted-media" style="margin: auto"></iframe>\
+                      <button type="button" id="vote1" class="btn btn-outline-light btn-lg" onclick="vote(1)">Vote</button>\
+                    </div>\
+                  </td>\
+                </tr>\
+              </table>\
+            </div>\
+          </div>';
+    }
+    else {
+      // Mobile
+      div.setAttribute("class", "Mobilevote container-fluid");
+      div.innerHTML =
+        '<div class="row">\
+            <div class="col">\
+            </div>\
+          </div>\
+          <div class="row">\
+            <div class="col text-left">\
+              <iframe id="song0" frameborder="0" allowtransparency="true" allow="encrypted-media" style="margin: auto"></iframe>\
+            </div>\
+            <div class="col text-right">\
+              <button type="button" id="vote0" class="btn btn-outline-light btn-lg" onclick="vote(0)">Vote</button>\
+            </div>\
+          </div>\
+          <div class="row">\
+            <div class="col">\
+              <p class="text-center">vs</p>\
+            </div>\
+            <div class="col">\
+            </div>\
+          </div>\
+          <div class="row" style="margin-bottom: 20vh">\
+            <div class="col text-left">\
+              <iframe id="song1" frameborder="0" allowtransparency="true" allow="encrypted-media" style="margin: auto"></iframe>\
+            </div>\
+            <div class="col text-right">\
+              <button type="button" id="vote1" class="btn btn-outline-light btn-lg" onclick="vote(1)">Vote</button>\
+            </div>\
+          </div>'
+    }
+    container.appendChild(div);
+  </script>
+
+  <script>
+    // Make text bigger for smaller screens
+    if ($(window).width() > 500) {
+      jQuery("#header").fitText(1.5);
+    }
+    else {
+      jQuery("#header").fitText(0.5);
+    }
+  </script>
+</body>
+
+</html>

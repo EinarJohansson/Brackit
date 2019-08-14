@@ -1,0 +1,27 @@
+html{min-height:100%}
+body{height:100%;color:#fff;background:linear-gradient(-45deg,#b4fe89,#766edf,#23d5ab,#c023d5);background-size:400% 500%;-webkit-animation:Gradient 30s ease infinite;-moz-animation:Gradient 30s ease infinite;animation:Gradient 30s ease infinite}
+@-webkit-keyframes Gradient{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+@-moz-keyframes Gradient{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+@keyframes Gradient{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+h1{color:#fff;font-family:'Titillium Web',Arial}
+p{color:#fff}
+#desc{margin-bottom:4vh}
+.button{margin-top:5vh}
+#login{background-color:transparent;border-color:#fff;text-align:center;color:#fff;border-radius:25px}
+#loading,.Mobilevote,.bracket-header,.description{margin-top:10vh}
+.infobox{text-align:center;overflow-inline:hidden}
+span{font-family:'Titillium Web',Arial;font-size:20px;color:#333}
+.infobox>span{width:64px;font-weight:700;font-size:14px}
+table{table-layout:fixed}

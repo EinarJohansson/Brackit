@@ -1,0 +1,36 @@
+html{min-height:100%}
+body{height:100%;color:#fff;background:linear-gradient(-45deg,#b4fe89,#766edf,#23d5ab,#c023d5);background-size:400% 500%;-webkit-animation:Gradient 30s ease infinite;-moz-animation:Gradient 30s ease infinite;animation:Gradient 30s ease infinite}
+@-webkit-keyframes Gradient{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+@-moz-keyframes Gradient{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+@keyframes Gradient{
+0%{background-position:0 50%}
+50%{background-position:100% 50%}
+100%{background-position:0 50%}
+}
+h1{color:#fff;font-family:'Titillium Web',Arial}
+p{color:#fff}
+#desc{margin-bottom:4vh}
+.button{margin-top:5vh}
+.Desktopvote,.Mobilevote{display:none}
+.form-group{width:72%;margin:auto;background:#fff}
+.form-group p{font-family:Arial;font-size:15px;border:1px;color:#999;border-style:solid;border-color:transparent;margin:0;display:none;padding:10px;text-align:left}
+.form-group p:hover{color:#3021ff;background-color:#e7e5e5}
+.search-field{background:#fff;border-color:transparent;border-bottom-color:#999;font-family:Arial;font-size:20px;background:0 0;color:#999;padding:10px}
+#vote0,#vote1{margin:auto;margin-top:1vh}
+.song{margin-top:2vh}
+#loading,.Mobilevote,.bracket-header,.description{margin-top:10vh}
+.infobox{text-align:center;overflow-inline:hidden}
+span{font-family:'Titillium Web',Arial;font-size:20px;color:#333}
+.infobox>span{width:100px;font-weight:700;font-size:14px}
+table{table-layout:fixed}
+@media only screen and (max-width:400px){
+.infobox>span{width:50px}
+}
