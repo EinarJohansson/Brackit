@@ -265,6 +265,6 @@ app.get('/bracket/', function (req, res) {
     });
   });
 });
-
-console.log('Listening on 80');
-app.listen(80);
+app.listen(process.env.PORT || 80, () => {
+  console.log("Now listening");
+});
