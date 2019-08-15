@@ -126,8 +126,7 @@ app.get('/data/statistics', function (req, res) {
     if (err)
       throw err;
 
-    var db = client.db("Brackit");
-    var brackets = db.collection("Brackets");
+      var brackets = client.collection("Brackets");
 
     brackets.aggregate([
       {
@@ -189,7 +188,6 @@ app.post('/authenticated/create/', function (req, res) {
       if (err)
         throw err;
 
-      var db = client.db("Brackit");
       var bracket = req.body;
 
       var today = new Date();
@@ -198,7 +196,7 @@ app.post('/authenticated/create/', function (req, res) {
       var dateTime = date + ' ' + time;
 
       bracket.date = dateTime;
-      db.collection("Brackets").insertOne(bracket, function (err, response) {
+      client.collection("Brackets").insertOne(bracket, function (err, response) {
         if (err)
           throw err;
         console.log("1 bracket inserted");
@@ -220,9 +218,7 @@ app.get('/bracket/', function (req, res) {
     var id = (ObjectId.isValid(req.query.id)) ? ObjectId(req.query.id) : null
     const cleanid = sanitize(id);
 
-    var db = client.db("Brackit");
-    var brackets = db.collection("Brackets");
-
+    var brackets = client.collection("Brackets");
 
     // Finding the desired bracket
     brackets.findOne({ _id: cleanid }, function (err, bracket) {
