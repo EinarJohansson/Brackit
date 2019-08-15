@@ -2,7 +2,7 @@ var Access_token, Refresh_token;
 $(document).ready(() => {
   // Get tokens from the server 
   $.ajax({
-    url: 'https://letsbrackit.herokuapp.com//authenticated/tokens',
+    url: 'https://letsbrackit.herokuapp.com/authenticated/tokens',
     type: "GET",
     success: (response) => {
       Access_token = response.access_token;
