@@ -4,7 +4,7 @@ var containerRows = [];
 
 $(document).ready(() => {
     $.ajax({
-        url: 'http://brackit.se/data/statistics',
+        url: 'https://letsbrackit.herokuapp.com/data/statistics',
         type: "GET",
         success: (res) => {
             var tableBody = document.getElementsByTagName('tbody')[0];
