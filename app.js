@@ -7,12 +7,11 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId
 const sanitize = require('mongo-sanitize');
 const session = require('express-session');
-const { MONGODB_URI, CLIENT_ID, CLIENT_SECRET, SESSION_SECRET } = require('./config');
 
-const url = MONGODB_URI || "mongodb://localhost:27017/Brackit";
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017/Brackit";
 
-const client_id = CLIENT_ID; // Your client id
-const client_secret = CLIENT_SECRET; // Your secret
+const client_id = process.env.CLIENT_ID; // Your client id
+const client_secret = process.env.CLIENT_SECRET; // Your secret
 const redirect_uri = 'http://brackit.se/callback'; // Your redirect uri
 
 /**
@@ -49,7 +48,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false }
