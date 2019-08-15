@@ -12,7 +12,7 @@ const url = process.env.MONGODB_URI || "mongodb://localhost:27017/Brackit";
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
-const redirect_uri = 'http://brackit.se/callback'; // Your redirect uri
+const redirect_uri = 'https://letsbrackit.herokuapp.com/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
