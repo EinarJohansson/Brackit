@@ -123,7 +123,7 @@ function pushBracket(r0, r1, r2, w) {
 
 function getBracket(id) {
     $.ajax({
-        url: 'https://letsbrackit.herokuapp.com/?id=' + id,
+        url: 'https://letsbrackit.herokuapp.com/bracket/?id=' + id,
         type: "GET",
         success: (response) => {            
             brackify(response.bracket.round0, response.bracket.round1, response.bracket.round2, response.bracket.winner);
