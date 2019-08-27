@@ -7,13 +7,12 @@ const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId
 const sanitize = require('mongo-sanitize');
 const session = require('express-session');
-const { MONGODB_URI, CLIENT_ID, CLIENT_SECRET, SESSION_SECRET } = require('./config');
 
-const url = MONGODB_URI || "mongodb://localhost:27017/Brackit";
-
-const client_id = CLIENT_ID; // Your client id
-const client_secret = CLIENT_SECRET; // Your secret
-const redirect_uri = 'http://brackit.se/callback'; // Your redirect uri
+const mongodb_uri = process.env.MONGODB_URI || "mongodb://localhost:27017/Brackit"; // Mongodb URI
+const mongodb_db = process.env.MONGODB_DB; // Database name
+const client_id = process.env.CLIENT_ID; // Spotify client id
+const client_secret = process.env.CLIENT_SECRET; // Spotify client secret
+const redirect_uri = 'https://letsbrackit.herokuapp.com/callback'; // Redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -49,7 +48,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use(session({
-  secret: SESSION_SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false }
@@ -123,11 +122,11 @@ app.get('/data', function (req, res) {
 });
 
 app.get('/data/statistics', function (req, res) {
-  MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
+  MongoClient.connect(mongodb_uri, { useNewUrlParser: true }, function (err, client) {
     if (err)
       throw err;
-
-    var db = client.db("Brackit");
+    
+    var db = client.db(mongodb_db);
     var brackets = db.collection("Brackets");
 
     brackets.aggregate([
@@ -186,11 +185,12 @@ app.get('/authenticated/tokens', function (req, res) {
 app.post('/authenticated/create/', function (req, res) {
   sesh = req.session;
   if (sesh.access_token && sesh.refresh_token) {
-    MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
+    MongoClient.connect(mongodb_uri, { useNewUrlParser: true }, function (err, client) {
       if (err)
         throw err;
+      
+      var db = client.db(mongodb_db);
 
-      var db = client.db("Brackit");
       var bracket = req.body;
 
       var today = new Date();
@@ -214,16 +214,15 @@ app.post('/authenticated/create/', function (req, res) {
 });
 
 app.get('/bracket/', function (req, res) {
-  MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
+  MongoClient.connect(mongodb_uri, { useNewUrlParser: true }, function (err, client) {
     if (err)
       throw err;
 
     var id = (ObjectId.isValid(req.query.id)) ? ObjectId(req.query.id) : null
     const cleanid = sanitize(id);
 
-    var db = client.db("Brackit");
+    var db = client.db(mongodb_db);
     var brackets = db.collection("Brackets");
-
 
     // Finding the desired bracket
     brackets.findOne({ _id: cleanid }, function (err, bracket) {

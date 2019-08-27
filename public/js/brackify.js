@@ -107,23 +107,23 @@ function pushBracket(r0, r1, r2, w) {
 
     $.ajax({
         type: "POST",
-        url: "http://brackit.se/authenticated/create",
+        url: "https://letsbrackit.herokuapp.com/authenticated/create",
         data: JSON.stringify(bracket),
         contentType: 'application/json',
         success: function (response) {
             const objectID = response;
-            var url = "http://brackit.se/?id=" + objectID
+            var url = "https://letsbrackit.herokuapp.com/?id=" + objectID
             window.location.replace(url);
         },
         error: function () {
-            window.location.replace('http://brackit.se');
+            window.location.replace('https://letsbrackit.herokuapp.com');
         }
     });
 }
 
 function getBracket(id) {
     $.ajax({
-        url: 'http://brackit.se/bracket/?id=' + id,
+        url: 'https://letsbrackit.herokuapp.com/bracket/?id=' + id,
         type: "GET",
         success: (response) => {            
             brackify(response.bracket.round0, response.bracket.round1, response.bracket.round2, response.bracket.winner);
